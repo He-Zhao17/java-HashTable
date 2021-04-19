@@ -9,7 +9,6 @@ public class HashEntry {
     private Object value;
     private boolean deleted; // if there was previously a value here that was later deleted.
 
-
     /**
      * Constructor for class HashEntry
      *
@@ -20,6 +19,8 @@ public class HashEntry {
         if (key == null || value == null) {
             throw new IllegalArgumentException();
         }
+        //
+
         this.key = key;
         this.value = value;
         this.deleted = false;
