@@ -2,6 +2,8 @@ package hashTable.openHashing;
 import hashTable.HashEntry;
 import hashTable.Map;
 
+import java.math.BigInteger;
+
 public class HashTableOpenHashing implements Map {
     private Node[] table ;
     private int maxSize;
@@ -13,6 +15,9 @@ public class HashTableOpenHashing implements Map {
      */
     public HashTableOpenHashing(int maxSize) {
         // FILL IN CODE
+        this.maxSize = maxSize;
+        table = new Node[maxSize];
+        size = 0;
 
     }
 
@@ -25,7 +30,30 @@ public class HashTableOpenHashing implements Map {
     public boolean containsKey(String key) {
         // FILL IN CODE
 
+
         return false; // change
+    }
+
+    private int Hash(String key, int maxSize) {
+        maxSize = this.maxSize;
+        // a = 2;
+        BigInteger a = BigInteger.valueOf(2);
+
+        int resKey = 0;
+        BigInteger res = BigInteger.valueOf(0);
+        if (key.length() == 0) {
+            return resKey;
+        }
+        int first = (int) key.charAt(0);
+        res = BigInteger.valueOf(first);
+        for (int i = 1; i < key.length(); i++) {
+            int temp = (int) key.charAt(i);
+            BigInteger tempBI = BigInteger.valueOf(temp);
+            res = tempBI.add(res.multiply(a));
+        }
+        BigInteger BMaxSize = BigInteger.valueOf(maxSize);
+        BigInteger result = res.remainder(BMaxSize);
+        return result.intValue();
     }
 
     /** Add (key, value) to the map.
