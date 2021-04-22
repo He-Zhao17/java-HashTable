@@ -17,6 +17,9 @@ public class HashTableClosedHashingDH implements Map {
      */
     public HashTableClosedHashingDH(int maxSize) {
         // FILL IN CODE
+        this.maxSize = maxSize;
+        size = 0;
+        this.table = new HashEntry[maxSize];
 
     }
 
