@@ -48,7 +48,7 @@ public class HashTableClosedHashingLP implements Map {
     }
 
     private int Hash(String key, int maxSize) {
-        maxSize = this.maxSize;
+        //maxSize = this.maxSize;
         // a = 33;
         BigInteger a = BigInteger.valueOf(33);
 
