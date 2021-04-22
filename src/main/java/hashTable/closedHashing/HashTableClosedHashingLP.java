@@ -3,6 +3,8 @@ package hashTable.closedHashing;
 import hashTable.HashEntry;
 import hashTable.Map;
 
+import java.math.BigInteger;
+
 /** The class that implements the Map interface using closed hashing;
  *  uses linear probing to resolve collisions */
 public class HashTableClosedHashingLP implements Map {
@@ -30,6 +32,28 @@ public class HashTableClosedHashingLP implements Map {
         // FILL IN CODE
 
         return false;
+    }
+
+    private int Hash(String key, int maxSize) {
+        maxSize = this.maxSize;
+        // a = 33;
+        BigInteger a = BigInteger.valueOf(33);
+
+        int resKey = 0;
+        BigInteger res = BigInteger.valueOf(0);
+        if (key.length() == 0) {
+            return resKey;
+        }
+        int first = (int) key.charAt(0);
+        res = BigInteger.valueOf(first);
+        for (int i = 1; i < key.length(); i++) {
+            int temp = (int) key.charAt(i);
+            BigInteger tempBI = BigInteger.valueOf(temp);
+            res = tempBI.add(res.multiply(a));
+        }
+        BigInteger BMaxSize = BigInteger.valueOf(maxSize);
+        BigInteger result = res.remainder(BMaxSize);
+        return result.intValue();
     }
 
     /** Add (key, value) to the map.
