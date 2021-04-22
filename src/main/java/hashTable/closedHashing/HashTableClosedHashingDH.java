@@ -115,7 +115,47 @@ public class HashTableClosedHashingDH implements Map {
     @Override
     public void put(String key, Object value) {
         // FILL IN CODE
-        if ()
+        if (key == null) {
+            throw new IllegalArgumentException();
+        }
+
+        double factor = (double) (this.size + 1) / (double) this.maxSize;
+        if (factor > 0.6) {
+            reHash();
+            put(key, value);
+        } else {
+            BigInteger t = getK(key, this.maxSize);
+            int hk = getHk(t, this.maxSize);
+            int k = hk;
+            if (this.table[k] == null) {
+                this.table[k] = new HashEntry(key, value);
+                size++;
+            } else if (this.table[k].isDeleted()) {
+                this.table[k] = new HashEntry(key, value);
+                size++;
+            } else if (this.table[k].getKey().equals(key)) {
+                this.table[k].setValue(value);
+            } else {
+                int dk = getDk(t, this.maxSize);
+                k = (k + dk) % this.maxSize;
+                int times = this.maxSize / dk + 2;
+                int tt = 1;
+                while (this.table[k] != null && !this.table[k].isDeleted()) {
+                    if (tt > times) {
+                        reHash();
+                        put(key, value);
+                    }
+                    if (this.table[k].getKey().equals(key)) {
+                        this.table[k].setValue(value);
+                    } else {
+                        k = (k + dk) % this.maxSize;
+                        tt++;
+                    }
+                }
+                this.table[k] = new HashEntry(key, value);
+                size++;
+            }
+        }
     }
 
     private void reHash() {
