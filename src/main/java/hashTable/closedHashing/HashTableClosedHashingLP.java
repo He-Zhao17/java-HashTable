@@ -87,14 +87,25 @@ public class HashTableClosedHashingLP implements Map {
             reHash();
             put(key, value);
             size++;
+        } else {
+            int k = Hash(key, this.maxSize);
+            while (this.table[k] != null && !this.table[k].isDeleted()) {
+                if (this.table[k].getKey().equals(key)) {
+                    this.table[k].setValue(value);
+                    return;
+                } else {
+                    k = (k + 1) % this.maxSize;
+                }
+            }
+            this.table[k] = new HashEntry(key, value);
+            size++;
         }
-
-
     }
 
     private void reHash() {
         int maxSize2 = maxSize * 2 + 1;
         HashEntry[] tempArr = this.table;
+        this.size = 0;
         for (int i = 0; i < tempArr.length; i++ ) {
             if (tempArr[i] == null || tempArr[i].isDeleted()) {
                 continue;
