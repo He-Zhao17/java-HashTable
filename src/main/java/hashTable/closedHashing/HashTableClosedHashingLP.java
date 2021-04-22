@@ -79,6 +79,15 @@ public class HashTableClosedHashingLP implements Map {
     @Override
     public void put(String key, Object value) {
         // FILL IN CODE
+        if (key == null) {
+            throw new IllegalArgumentException();
+        }
+        double factor = (double) (this.size +  1) / (double) maxSize;
+        if (factor > 0.6) {
+            reHash();
+            put(key, value);
+            size++;
+        }
 
 
     }

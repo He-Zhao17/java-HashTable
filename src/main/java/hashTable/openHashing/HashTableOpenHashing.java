@@ -83,6 +83,7 @@ public class HashTableOpenHashing implements Map {
             //Rehash.
             reHash();
             put(key, value);
+            size++;
         } else {
             int k = Hash(HE.getKey(), this.maxSize);
             if (table[k] == null) {
