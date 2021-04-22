@@ -19,6 +19,9 @@ public class HashTableClosedHashingLP implements Map {
      */
     public HashTableClosedHashingLP(int maxSize) {
         // FILL IN CODE
+        this.table = new HashEntry[maxSize];
+        this.maxSize = maxSize;
+        size = 0;
     }
 
     /** Return true if the map contains a (key, value) pair associated with this key,
