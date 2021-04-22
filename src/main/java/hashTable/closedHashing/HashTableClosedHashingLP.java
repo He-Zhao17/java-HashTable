@@ -182,7 +182,7 @@ public class HashTableClosedHashingLP implements Map {
         for (int i = 0; i < this.maxSize; i++) {
             sb.append(i);
             sb.append(": ");
-            if (this.table[i] == null || this.table[i].isDeleted()) {
+            if (this.table[i] == null) {
                 sb.append("null");
             } else {
                 sb.append(this.table[i].toString());
