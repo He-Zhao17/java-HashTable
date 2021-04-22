@@ -47,11 +47,17 @@ public class HashTableClosedHashingDH implements Map {
             } else {
                 int dk = getDk(t, this.maxSize);
                 k = (k + dk) % this.maxSize;
+                int times = this.maxSize / dk + 2;
+                int tt = 1;
                 while (this.table[k] != null && !this.table[k].isDeleted()) {
+                    if (tt > times) {
+                        break;
+                    }
                     if (this.table[k].getKey().equals(key)) {
                         return true;
                     } else {
                         k = (k + dk) % this.maxSize;
+                        tt++;
                     }
                 }
                 return false;
