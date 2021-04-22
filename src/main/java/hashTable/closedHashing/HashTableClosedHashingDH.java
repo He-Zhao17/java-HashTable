@@ -43,12 +43,12 @@ public class HashTableClosedHashingDH implements Map {
                 return true;
             } else {
                 int dk = getDk(t, this.maxSize);
-                k += dk;
+                k = (k + dk) % this.maxSize;
                 while (this.table[k] != null && !this.table[k].isDeleted()) {
                     if (this.table[k].getKey().equals(key)) {
                         return true;
                     } else {
-                        k += dk;
+                        k = (k + dk) % this.maxSize;
                     }
                 }
                 return false;
