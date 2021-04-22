@@ -89,14 +89,17 @@ public class HashTableOpenHashing implements Map {
             if (table[k] == null) {
                 table[k] = new Node(HE);
             } else {
-                /*
+                //
                 Node pointer = this.table[k];
                 while (pointer != null) {
                     if (pointer.entry().getKey().equals(key)) {
-                        pointer.entry().getKey()
+                        pointer.entry().setValue(value);
+                        return;
+                    } else {
+                        pointer = pointer.next();
                     }
                 }
-                */
+                //
                 table[k] = new Node(HE, table[k]);
             }
             size++;
