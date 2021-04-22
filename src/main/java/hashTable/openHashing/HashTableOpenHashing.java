@@ -120,7 +120,17 @@ public class HashTableOpenHashing implements Map {
      */
     public Object get(String key) {
         // FILL IN CODE
-
+        if (key == null) {
+            throw new IllegalArgumentException();
+        }
+        int k = Hash(key, this.maxSize);
+        Node pointer = this.table[k];
+        while (pointer != null) {
+            if (pointer.entry().getKey().equals(key)) {
+                return pointer.entry().getValue();
+            }
+            pointer = pointer.next();
+        }
         return null; // change
     }
 
