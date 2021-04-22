@@ -79,6 +79,19 @@ public class HashTableClosedHashingLP implements Map {
 
     }
 
+    private void reHash() {
+        int maxSize2 = maxSize * 2 + 1;
+        HashEntry[] tempArr = this.table;
+        for (int i = 0; i < tempArr.length; i++ ) {
+            if (tempArr[i] == null || tempArr[i].isDeleted()) {
+                continue;
+            } else {
+                put(tempArr[i].getKey(), tempArr[i].getValue());
+            }
+        }
+        this.maxSize = maxSize2;
+    }
+
     /** Return the value associated with the given key or null, if the map does not contain the key.
      * If the key is null, throw IllegalArgumentException.
      *
