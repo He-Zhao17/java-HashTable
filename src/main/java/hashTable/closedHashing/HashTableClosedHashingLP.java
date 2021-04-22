@@ -147,7 +147,19 @@ public class HashTableClosedHashingLP implements Map {
     @Override
     public Object remove(String key) {
         // FILL IN CODE
-
+        if (key == null) {
+            throw new IllegalArgumentException();
+        }
+        int k = Hash(key, maxSize);
+        while (this.table[k] != null && !this.table[k].isDeleted()) {
+            if (this.table[k].getKey().equals(key)) {
+                this.table[k].setDeleted(true);
+                this.size--;
+                return this.table[k].getValue();
+            } else {
+                k = (k + 1) % this.maxSize;
+            }
+        }
         return null;
     }
 
