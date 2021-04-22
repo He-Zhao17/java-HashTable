@@ -87,6 +87,14 @@ public class HashTableOpenHashing implements Map {
             if (table[k] == null) {
                 table[k] = new Node(HE);
             } else {
+                /*
+                Node pointer = this.table[k];
+                while (pointer != null) {
+                    if (pointer.entry().getKey().equals(key)) {
+                        pointer.entry().getKey()
+                    }
+                }
+                */
                 table[k] = new Node(HE, table[k]);
             }
             size++;
@@ -141,8 +149,29 @@ public class HashTableOpenHashing implements Map {
      */
     public Object remove(String key) {
         // FILL IN CODE
+        if (key == null) {
+            throw new IllegalArgumentException();
+        }
+        int k = Hash(key, this.maxSize);
+        Node pointer = this.table[k];
+        if (pointer == null) {
+            return null;
+        } else if (pointer.entry().getKey().equals(key)) {
+            table[k] = pointer.next();
+            return pointer.entry().getValue();
 
-        return null; // change
+        } else {
+            while (pointer.next() != null) {
+                if (pointer.next().entry().getKey().equals(key)) {
+                    Node temp = pointer.next();
+                    pointer.setNext(temp.next());
+                    return temp.entry().getValue();
+                }
+                pointer = pointer.next();
+            }
+            return null;
+        }
+        //return null; // change
     }
 
     /** Return the actual number of elements in the map.
