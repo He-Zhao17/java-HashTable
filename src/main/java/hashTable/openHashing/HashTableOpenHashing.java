@@ -29,15 +29,23 @@ public class HashTableOpenHashing implements Map {
      */
     public boolean containsKey(String key) {
         // FILL IN CODE
-
-
-        return false; // change
+        int hK = this.Hash(key, this.maxSize);
+        Node pointer = this.table[hK];
+        while (pointer != null) {
+            if (pointer.entry().getKey().equals(key)) {
+                return true;
+            } else {
+                pointer = pointer.next();
+            }
+        }
+        return false;
+        //return false; // change
     }
 
     private int Hash(String key, int maxSize) {
         maxSize = this.maxSize;
-        // a = 2;
-        BigInteger a = BigInteger.valueOf(2);
+        // a = 33;
+        BigInteger a = BigInteger.valueOf(33);
 
         int resKey = 0;
         BigInteger res = BigInteger.valueOf(0);
