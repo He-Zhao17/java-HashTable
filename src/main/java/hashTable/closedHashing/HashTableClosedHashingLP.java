@@ -33,6 +33,9 @@ public class HashTableClosedHashingLP implements Map {
     @Override
     public boolean containsKey(String key) {
         // FILL IN CODE
+        if (key == null) {
+            throw new IllegalArgumentException();
+        }
         int k = Hash(key, this.maxSize);
         while (this.table[k] != null && !this.table[k].isDeleted()) {
             if (this.table[k].getKey().equals(key)) {
@@ -76,6 +79,7 @@ public class HashTableClosedHashingLP implements Map {
     @Override
     public void put(String key, Object value) {
         // FILL IN CODE
+
 
     }
 
