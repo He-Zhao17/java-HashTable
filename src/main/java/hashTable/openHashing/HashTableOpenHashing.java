@@ -16,8 +16,9 @@ public class HashTableOpenHashing implements Map {
     public HashTableOpenHashing(int maxSize) {
         // FILL IN CODE
         this.maxSize = maxSize;
-        table = new Node[maxSize];
         size = 0;
+        table = new Node[maxSize];
+
 
     }
 
@@ -73,6 +74,42 @@ public class HashTableOpenHashing implements Map {
      */
     public void put(String key, Object value) {
             // FILL IN CODE
+        if (key == null) {
+            throw new IllegalArgumentException();
+        }
+        HashEntry HE = new HashEntry(key, value);
+        // load factor = 0.5? ...0.6??  I use 0.6;
+        if ((double) (this.size + 1) / (double) this.maxSize > 0.6) {
+            //Rehash.
+            reHash();
+        } else {
+            int k = Hash(HE.getKey(), this.maxSize);
+            if (table[k] == null) {
+                table[k] = new Node(HE);
+            } else {
+                table[k] = new Node(HE, table[k]);
+            }
+            size++;
+        }
+    }
+
+    private void reHash() {
+        int maxSize2 = this.maxSize * 2 + 1;
+        Node[] tempArr = this.table;
+        this.table = new Node[maxSize2];
+        int maxSizeOld = this.maxSize;
+        int sizeOld = this.size;
+        this.size = 0;
+        this.maxSize = maxSize2;
+        for (int i = 0; i < maxSizeOld; i++) {
+            if (tempArr[i] != null) {
+                Node pointer = tempArr[i];
+                while (pointer != null) {
+                    put(pointer.entry().getKey(), pointer.entry().getValue());
+                    pointer = pointer.next();
+                }
+            }
+        }
     }
 
     /** Return the value associated with the given key or null, if the map does not contain the key.
