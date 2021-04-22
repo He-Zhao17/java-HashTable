@@ -106,14 +106,17 @@ public class HashTableClosedHashingLP implements Map {
         HashEntry[] tempArr = this.table;
         this.size = 0;
         this.table = new HashEntry[maxSize2];
+        this.maxSize = maxSize2;
         for (int i = 0; i < tempArr.length; i++ ) {
-            if (tempArr[i] == null || tempArr[i].isDeleted()) {
+            if (tempArr[i] == null) {
+                continue;
+            } else if (tempArr[i].isDeleted()) {
                 continue;
             } else {
                 put(tempArr[i].getKey(), tempArr[i].getValue());
             }
         }
-        this.maxSize = maxSize2;
+
     }
 
     /** Return the value associated with the given key or null, if the map does not contain the key.
