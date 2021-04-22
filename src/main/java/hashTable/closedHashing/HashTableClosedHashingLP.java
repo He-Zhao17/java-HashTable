@@ -86,7 +86,6 @@ public class HashTableClosedHashingLP implements Map {
         if (factor > 0.6) {
             reHash();
             put(key, value);
-            size++;
         } else {
             int k = Hash(key, this.maxSize);
             while (this.table[k] != null && !this.table[k].isDeleted()) {
@@ -106,6 +105,7 @@ public class HashTableClosedHashingLP implements Map {
         int maxSize2 = maxSize * 2 + 1;
         HashEntry[] tempArr = this.table;
         this.size = 0;
+        this.table = new HashEntry[maxSize2];
         for (int i = 0; i < tempArr.length; i++ ) {
             if (tempArr[i] == null || tempArr[i].isDeleted()) {
                 continue;
