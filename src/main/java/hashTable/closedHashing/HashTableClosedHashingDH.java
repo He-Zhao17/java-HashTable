@@ -34,6 +34,9 @@ public class HashTableClosedHashingDH implements Map {
     @Override
     public boolean containsKey(String key) {
         // FILL IN CODE
+        if (key == null) {
+            throw new IllegalArgumentException();
+        }
         BigInteger t = getK(key, this.maxSize);
         int hk = getHk(t, this.maxSize);
         //
@@ -112,6 +115,7 @@ public class HashTableClosedHashingDH implements Map {
     @Override
     public void put(String key, Object value) {
         // FILL IN CODE
+        if ()
     }
 
     private void reHash() {
