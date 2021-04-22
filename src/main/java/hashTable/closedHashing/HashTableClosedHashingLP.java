@@ -33,7 +33,14 @@ public class HashTableClosedHashingLP implements Map {
     @Override
     public boolean containsKey(String key) {
         // FILL IN CODE
-
+        int k = Hash(key, this.maxSize);
+        while (this.table[k] != null && !this.table[k].isDeleted()) {
+            if (this.table[k].getKey().equals(key)) {
+                return true;
+            } else {
+                k = (k + 1) % maxSize;
+            }
+        }
         return false;
     }
 
