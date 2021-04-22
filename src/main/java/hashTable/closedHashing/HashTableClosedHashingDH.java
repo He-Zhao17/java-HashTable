@@ -185,8 +185,35 @@ public class HashTableClosedHashingDH implements Map {
     @Override
     public Object get(String key) {
         // FILL IN CODE
+        BigInteger t = getK(key, this.maxSize);
+        int hk = getHk(t, this.maxSize);
+        int k = hk;
+        if (this.table[k] == null) {
+            return null;
+        } else if (this.table[k].isDeleted()) {
+            return null;
+        } else if (this.table[k].getKey().equals(key)) {
+            return this.table[k].getValue();
+        } else {
+            int dk = getDk(t, this.maxSize);
+            k = (k + dk) % maxSize;
+            int times = this.maxSize / dk + 2;
+            int tt = 1;
+            while (this.table[k] != null && !this.table[k].isDeleted()) {
+                if (tt > times) {
+                    break;
+                }
+                if (this.table[k].getKey().equals(key)) {
+                    return this.table[k].getValue();
+                } else {
+                    k = (k + dk) % this.maxSize;
+                    tt++;
+                }
+            }
+            return null;
+        }
 
-        return null;
+        //return null;
     }
 
     /** Remove a (key, value) entry if it exists.
