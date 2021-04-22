@@ -158,6 +158,7 @@ public class HashTableOpenHashing implements Map {
             return null;
         } else if (pointer.entry().getKey().equals(key)) {
             table[k] = pointer.next();
+            this.size--;
             return pointer.entry().getValue();
 
         } else {
@@ -165,6 +166,7 @@ public class HashTableOpenHashing implements Map {
                 if (pointer.next().entry().getKey().equals(key)) {
                     Node temp = pointer.next();
                     pointer.setNext(temp.next());
+                    this.size--;
                     return temp.entry().getValue();
                 }
                 pointer = pointer.next();
@@ -189,6 +191,23 @@ public class HashTableOpenHashing implements Map {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         // FILL IN CODE
+        for (int i = 0; i < maxSize; i++) {
+            sb.append(i);
+            sb.append(": ");
+            if (this.table[i] == null) {
+                sb.append("null\n");
+            } else {
+                Node pointer = this.table[i];
+                while (pointer != null) {
+                    sb.append(pointer.toString());
+                    if (pointer.next() != null) {
+                        sb.append(", ");
+                    }
+                    pointer = pointer.next();
+                }
+                sb.append("\n");
+            }
+        }
 
         return sb.toString();
     }
