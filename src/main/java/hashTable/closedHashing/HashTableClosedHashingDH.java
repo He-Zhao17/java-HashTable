@@ -290,8 +290,19 @@ public class HashTableClosedHashingDH implements Map {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         // FILL IN CODE
-
+        for (int i = 0; i < this.maxSize; i++) {
+            sb.append(i);
+            sb.append(": ");
+            if (this.table[i] == null) {
+                sb.append("null");
+            } else {
+                sb.append(this.table[i].toString());
+            }
+            sb.append("\n");
+        }
         return sb.toString();
+
+        //return sb.toString();
     }
 
     // Add other helper methods as needed
