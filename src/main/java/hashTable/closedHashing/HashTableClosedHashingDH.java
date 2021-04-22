@@ -191,6 +191,9 @@ public class HashTableClosedHashingDH implements Map {
     @Override
     public Object get(String key) {
         // FILL IN CODE
+        if (key == null) {
+            throw new IllegalArgumentException();
+        }
         BigInteger t = getK(key, this.maxSize);
         int hk = getHk(t, this.maxSize);
         int k = hk;
@@ -230,6 +233,7 @@ public class HashTableClosedHashingDH implements Map {
     @Override
     public Object remove(String key) {
         // FILL IN CODE
+
 
         return null;
     }
