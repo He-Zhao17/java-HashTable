@@ -201,17 +201,7 @@ public class HashTableOpenHashing implements Map {
             } else {
                 Node pointer = this.table[i];
                 while (pointer != null) {
-                    sb.append("(");
-                    sb.append(pointer.entry().getKey());
-                    sb.append(", ");
-                    sb.append(pointer.entry().getValue());
-                    sb.append(", ");
-                    if (pointer.entry().isDeleted()) {
-                        sb.append("true");
-                    } else {
-                        sb.append("false");
-                    }
-                    sb.append(")");
+                    sb.append(pointer.entry().toString());
                     if (pointer.next() != null) {
                         sb.append(", ");
                     }

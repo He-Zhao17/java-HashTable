@@ -179,6 +179,11 @@ public class HashTableClosedHashingLP implements Map {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         // FILL IN CODE
+        for (int i = 0; i < this.maxSize; i++) {
+            sb.append(i);
+            sb.append(": ");
+
+        }
 
         return sb.toString();
     }
